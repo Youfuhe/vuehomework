@@ -12,7 +12,7 @@ export default new Router({
   routes: [
     {
       path: '*',
-      redirect: '/login'
+      redirect: '/index/customer_order'
     },
     {
       path: '/login',
@@ -34,7 +34,7 @@ export default new Router({
     },
 
     {
-      path: '/',
+      path: '/index',
       name: 'Dashborad',
       component: Dashborad,
       children: [
