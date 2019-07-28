@@ -8,10 +8,10 @@
     >
       <div class="pic" style="position: relative">
         <div class="tw-video-brand selfmake-brand text-center">
-          <span>動作片</span>
+          <span>{{item.category}}</span>
         </div>
-        <div>
-          <img class="img-fluid" :src="item.url" alt />
+        <div style="max-width:320px">
+          <img class="img-fluid" :src="item.imageUrl" alt />
         </div>
 
         <div class="dis w-100">
@@ -20,13 +20,13 @@
             style="background: linear-gradient(hsla(0,0%,9%,0),#111 40%);"
           >
             <div>
-              <h3 class="card-title text-left">{{item.name}}</h3>
-              <p class="text-left" style="color:#dcddde">{{item.title}}</p>
+              <h3 class="card-title text-left">{{item.title}}</h3>
+              <p class="text-left" style="color:#dcddde">{{item.description}}</p>
               <div class="heart position-absolute" style="bottom:20%;right:5%">
                 <i
                   class="fa-heart fa-lg text-white fas fa-2x"
                   :class="{'text-danger' : item.mylike}"
-                  @click="item.mylike = !item.mylike"
+                  @click=" item.mylike = !item.mylike"
                 ></i>
               </div>
               <div class="text-left">
@@ -43,7 +43,7 @@
             </div>
           </div>
         </div>
-        <p class="pt-2" style="font-size: 20px;color:#aaa">{{item.name}}</p>
+        <p class="pt-2" style="font-size: 20px;color:#aaa">{{item.title}}</p>
       </div>
     </div>
   </div>
@@ -53,24 +53,34 @@
 export default {
   data() {
     return {
-      products: [
-        {
-          id: "1",
-          mylike: true,
-          name: "夜問永春",
-          title: "主演:劉德華",
-          url: "https://img.ruten.com.tw/s1/3/81/1f/21737115866399_465.jpg"
-        },
-        {
-          id: "2",
-          mylike: false,
-          name: "玩命關頭",
-          title: "主演:45679",
-          url:
-            "https://images.zi.org.tw/kocpc/2019/03/1551940758-219b4b82f16e5aa0ca27610c1e9d151e.jpg"
-        }
-      ]
+      products: [],
+      product: {
+        id: "1",
+        mylike: true,
+        name: "夜問永春",
+        title: "主演:劉德華",
+        url: "https://img.ruten.com.tw/s1/3/81/1f/21737115866399_465.jpg"
+      }
     };
+  },
+  methods: {
+    getProduct() {
+      let vm = this;
+      const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/products/all`;
+      this.$http.get(api).then(response => {
+        console.log(response.data);
+        if (response.data.success) {
+          vm.products = response.data.products;
+          vm.products.forEach(item => {
+            item.mylike = true;
+          });
+        }
+      });
+    }
+  },
+
+  created() {
+    this.getProduct();
   }
 };
 </script>
