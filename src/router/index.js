@@ -6,13 +6,29 @@ import Login from '@/components/pages/Login'
 import Products from '@/components/pages/Products'
 import CustomerOrder from '@/components/pages/CustomerOrders'
 import CustomerOrderOut from '@/components/pages/CustomerOrderOut'
+import Customer from '@/components/customer/Customer'
+import Content from '@/components/customer/Content'
+
+
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {
       path: '*',
-      redirect: '/index/customer_order'
+      redirect: '/customer'
+    },
+    {
+      path: '/customer',
+      name: 'Customer',
+      component: Customer,
+      children: [
+        {
+          path: '',
+          name: 'Content',
+          component:Content,
+        },
+      ]
     },
     {
       path: '/login',

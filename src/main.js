@@ -32,7 +32,7 @@ Vue.use(VeeValidate, {
   }
 });
 
-Vue.component('Loading' ,Loading )
+Vue.component('loading' ,Loading )
 Vue.filter('currency' , currencyFilter)
 
 /* eslint-disable no-new */
