@@ -74,9 +74,11 @@
             </button>
           </form>
           <ul class="navbar-nav pr-4" style="line-height: 54px">
-            <li class="nav-item">
-              <a class="nav-link" href="#">管理員</a>
-            </li>
+            <router-link to="/login">
+              <li class="nav-item">
+                <a class="nav-link" href="#">管理員</a>
+              </li>
+            </router-link>
             <li class="nav-item" style="line-hight:54px">
               <a class="nav-link" href="#">
                 <div class="dropdown">
@@ -124,9 +126,9 @@
                       <span class="text-uppercase text-muted">Total</span>
                       <strong class="ml-auto text-white">{{ cart.total }}</strong>
                     </div>
-                    <router-link to="/customer/customeroder">
+                    <router-link to="/customer/cartcontent">
                       <button class="btn btn-success btn-block">
-                        <i aria-hidden="true" class="fa fa-cart-plus"></i> 結帳去
+                        <i aria-hidden="true" class="fa fa-cart-plus"></i> 購物車內容
                       </button>
                     </router-link>
                   </div>

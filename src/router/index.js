@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
 import Dashborad from '@/components/Dashborad'
 import Login from '@/components/pages/Login'
 import Products from '@/components/pages/Products'
@@ -9,8 +8,8 @@ import CustomerOrderOut from '@/components/pages/CustomerOrderOut'
 
 import Customer from '@/components/customer/Customer'
 import Content from '@/components/customer/Content'
-import Customeroder from '@/components/customer/order/Customeroder'
 import CustomerPay from '@/components/customer/order/CustomerPay'
+import CartContent from '@/components/customer/order/CartContent'
 
 
 Vue.use(Router)
@@ -31,16 +30,16 @@ export default new Router({
           name: 'Content',
           component:Content,
         },
-        {        
-          path: 'customeroder',
-          name: 'Customeroder',
-          component:Customeroder,
-        },
         {
           path: 'customerPay/:orderId',
           name: 'CustomerPay',
           component: CustomerPay,
         },
+        {
+          path: 'cartcontent',
+          name: 'CartContent',
+          component: CartContent,
+        }
       ]
     },
     {
