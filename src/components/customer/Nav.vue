@@ -3,7 +3,7 @@
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" :class="{bgsolid : scroll >= 100}">
       <router-link to="/customer">
         <a class="navbar pl-5" href="#">
-          <img src="/static/logo.png" style="width:140px" />
+          <img src="../../static/logo.png" style="width:140px" />
         </a>
       </router-link>
 
