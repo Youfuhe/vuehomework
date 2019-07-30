@@ -120,13 +120,13 @@
                           </td>
                           <td class="align-middle">{{ item.product.title }}</td>
                           <td class="align-middle">{{ item.qty }}{{ item.product.unit }}</td>
-                          <td class="align-middle text-right">{{ item.final_total }}</td>
+                          <td class="align-middle text-right">{{ item.final_total | currency}}</td>
                         </tr>
                       </tbody>
                     </table>
                     <div class="d-flex border-top border-bottom mb-3 p-1">
                       <span class="text-uppercase text-muted">Total</span>
-                      <strong class="ml-auto text-white">{{ cart.total }}</strong>
+                      <strong class="ml-auto text-white">{{ cart.total | currency}}</strong>
                     </div>
                     <router-link to="/customer/cartcontent">
                       <button class="btn btn-success btn-block">
@@ -142,7 +142,14 @@
       </nav>
     </div>
 
-    <h2 class="pb-5 text-center">每日精選隨你看</h2>
+    <h2 class="pb-5 text-center" v-if="category==='all'">每日精選隨你看</h2>
+    <h2 class="pb-5 text-center" v-if="category==='動作片'">精選動作片隨你看</h2>
+    <h2 class="pb-5 text-center" v-if="category==='懸疑片'">精選懸疑片隨你看</h2>
+    <h2 class="pb-5 text-center" v-if="category==='喜劇片'">精選喜劇片隨你看</h2>
+    <h2 class="pb-5 text-center" v-if="category==='恐怖片'">精選恐怖片隨你看</h2>
+    <h2 class="pb-5 text-center" v-if="category==='動畫片'">精選動畫片隨你看</h2>
+    <h2 class="pb-5 text-center" v-if="category==='like'">我的最愛</h2>
+
     <div class="row d-flex justify-content-center">
       <div
         class="col-xl-2 col-lg-6　py-4 pb-5"
@@ -224,15 +231,20 @@
                 <p class="mb-0">{{product.content}}</p>
               </blockquote>
               <div class="d-flex justify-content-between align-items-baseline">
-                <div class="h5" v-if="!product.price">{{product.origin_price}}元</div>
-                <del class="h6 text-danger" v-if="product.price">原價{{product.origin_price}}元</del>
-                <div class="h5" v-if="product.price">現在只要{{product.price}}元</div>
+                <div class="h5" v-if="!product.price">{{product.origin_price | currency}}元</div>
+                <del
+                  class="h6 text-danger"
+                  v-if="product.price"
+                >原價{{product.origin_price | currency}}元</del>
+                <div class="h5" v-if="product.price">現在只要{{product.price | currency}}元</div>
               </div>
               <select class="form-control mt-3" v-model="product.num">
                 <option v-for="num in 10" :value="num" :key="num">選購 {{num}} {{product.unit}}</option>
               </select>
               <div class="d-flex justify-content-end align-items-center pt-4">
-                <div class="text-muted text-nowrap mr-3">小計{{product.price * product.num}}元</div>
+                <div
+                  class="text-muted text-nowrap mr-3"
+                >小計{{product.price * product.num | currency}}元</div>
                 <button
                   type="button"
                   class="btn btn-success"
