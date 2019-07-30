@@ -41,8 +41,8 @@
         </a>
       </h6>
       <ul class="nav flex-column mb-2">
-        <li class="nav-item" @click="clickList='d'">
-          <router-link class="nav-link" :class="{'active': clickList==='d'}"  to="/index/customer_order">
+        <li class="nav-item">
+          <router-link class="nav-link" to="/customer">
             <i class="fas fa-shopping-cart"></i>
             模擬訂單
           </router-link>
@@ -56,7 +56,7 @@
 export default {
   data(){
     return{
-      clickList:'d'
+      clickList:'a'
     }
   },
   methods: {

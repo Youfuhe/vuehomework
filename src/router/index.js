@@ -3,8 +3,6 @@ import Router from 'vue-router'
 import Dashborad from '@/components/Dashborad'
 import Login from '@/components/pages/Login'
 import Products from '@/components/pages/Products'
-import CustomerOrder from '@/components/pages/CustomerOrders'
-import CustomerOrderOut from '@/components/pages/CustomerOrderOut'
 
 import Customer from '@/components/customer/Customer'
 import Content from '@/components/customer/Content'
@@ -58,24 +56,6 @@ export default new Router({
           component: Products,
           meta: { requiresAuth: true },
         },
-      ]
-    },
-
-    {
-      path: '/index',
-      name: 'Dashborad',
-      component: Dashborad,
-      children: [
-        {
-          path: 'customer_order',
-          name: 'CustomerOrder',
-          component: CustomerOrder,
-        },
-        {
-          path: 'customerOrderOut/:orderId',
-          name: 'CustomerOrderOut',
-          component: CustomerOrderOut,
-        }
       ]
     },
   ]

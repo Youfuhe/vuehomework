@@ -7,7 +7,7 @@
         class="navbar navbar-expand-lg navbar-light fixed-top"
         :class="{bgsolid : scroll >= 100}"
       >
-        <a class="navbar pl-5" href="#" @click.prevent="selectCategory('all')">
+        <a class="px-5" href="#" @click.prevent="category = 'all'">
           <img src="/static/logo.png" style="width:140px" />
         </a>
 
@@ -19,24 +19,25 @@
           aria-controls="navbarSupportedContent"
           aria-expanded="false"
           aria-label="Toggle navigation"
+          @click.prevent="doSeacher"
         >
           <i class="fas fa-bars"></i>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item" @click.prevent="selectCategory('動作片')">
+            <li class="nav-item" @click.prevent="category = '動作片'">
               <a class="nav-link" href="#">動作片</a>
             </li>
-            <li class="nav-item" @click.prevent="selectCategory('懸疑片')">
+            <li class="nav-item" @click.prevent="category = '懸疑片'">
               <a class="nav-link" href="#">懸疑片</a>
             </li>
 
-            <li class="nav-item" @click.prevent="selectCategory('喜劇片')">
+            <li class="nav-item" @click.prevent="category = '喜劇片'">
               <a class="nav-link" href="#">喜劇片</a>
             </li>
 
-            <li class="nav-item" @click.prevent="selectCategory('恐怖片')">
+            <li class="nav-item" @click.prevent="category = '恐怖片'">
               <a class="nav-link" href="#">恐怖片</a>
             </li>
 
@@ -51,8 +52,8 @@
                 @click.prevent
               >更多</a>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item pr-1" href="#" @click.prevent="selectCategory('動畫片')">動畫片</a>
-                <a class="dropdown-item" href="#" @click.prevent="selectCategory('like')">
+                <a class="dropdown-item pr-1" href="#" @click.prevent="category = '動畫片'">動畫片</a>
+                <a class="dropdown-item" href="#" @click.prevent="category = 'like'">
                   <i class="fa-heart fa-lg fas pr-2"></i>我的最愛
                 </a>
               </div>
@@ -64,6 +65,7 @@
               type="search"
               aria-label="Search"
               style="border-radius: 10px;"
+              v-model="search"
             />
             <button
               class="btn btn-success"
@@ -145,7 +147,7 @@
       <div
         class="col-xl-2 col-lg-6　py-4 pb-5"
         style="min-width: 290px;max-width:350px; position: relative;"
-        v-for="item in newProducts"
+        v-for="item in selectCategory "
         :key="item.id"
       >
         <div class="pic" style="position: relative">
@@ -168,7 +170,7 @@
                   <i
                     class="fa-heart fa-lg text-white fas fa-2x"
                     :class="{'text-danger' : item.mylike}"
-                    @click="addMylike(item);item.mylike = !item.mylike"
+                    @click="item.mylike = !item.mylike"
                   ></i>
                 </div>
                 <div class="text-left">
@@ -251,14 +253,16 @@ import $ from "jquery";
 export default {
   data() {
     return {
+      search: "",
       cartNum: "",
       cart: [],
       scroll: "0",
       isLoading: false,
       lodingItme: "",
-      products: [],
       newProducts: [],
-      product: {}
+      product: {},
+      products: [],
+      category: "all"
     };
   },
   mounted() {
@@ -269,8 +273,6 @@ export default {
       this.scroll = document.documentElement.scrollTop;
     },
     getProduct() {
-      console.log("4");
-      console.log("2");
       let vm = this;
       const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/products/all`;
       vm.isLoading = true;
@@ -280,9 +282,8 @@ export default {
           vm.products = response.data.products;
           vm.products.forEach(item => {
             this.$set(item, "mylike", false);
-            // 上面的程式是等待父元素獲取API
-            this.products = this.$parent.$data.products;
-            this.selectCategory("all");
+            this.products = response.data.products;
+            // this.selectCategory("all");
             vm.isLoading = false;
           });
         }
@@ -323,7 +324,7 @@ export default {
         if (response.data.success) {
           vm.cart = response.data.data;
           vm.cartNum = vm.cart.carts.length;
-          console.log(vm.cart.total);
+          // console.log(vm.cart.total);
         }
       });
     },
@@ -338,40 +339,40 @@ export default {
           this.getCart();
         }
       });
-    },
+    }
+  },
+  computed: {
     selectCategory(category) {
-      if (category === "all") {
-        this.newProducts = this.products;
-      } else {
-        console.log(category);
-        this.newProducts = [];
-        if (category === "like") {
+      if (this.search === "") {
+        if (this.category === "all") {
+          return this.products;
+        } else {
+          let newProducts = [];
+          if (this.category === "like") {
+            this.products.forEach(item => {
+              if (item.mylike === true) {
+                console.log(item);
+                newProducts.push(item);
+              }
+            });
+            return newProducts;
+          }
           this.products.forEach(item => {
-            if (item.mylike === true) {
-              console.log(item);
-              this.newProducts.push(item);
+            if (item.category === this.category) {
+              newProducts.push(item);
             }
           });
+          return newProducts;
         }
-        this.products.forEach(item => {
-          if (item.category === category) {
-            this.newProducts.push(item);
-          }
+      } else {
+        let vm = this;
+        return vm.products.filter(function(user) {
+          return user.title.indexOf(vm.search) !== -1;
         });
       }
-    },
-
-    // 更新products的mylike
-    addMylike(item) {
-      this.products.forEach(el => {
-        if (el.id === item.id) {
-          el = item;
-        }
-      });
     }
   },
   created() {
-    console.log("3");
     this.getProduct();
     this.getCart();
   }
@@ -392,7 +393,7 @@ a {
   border-color: rgba(0, 190, 6, 1);
 }
 
-.navbar-expand-lg {
+.navbar {
   z-index: 100;
   background: linear-gradient(#1a1a1a, transparent);
   transition: background-color 0.5s linear;
