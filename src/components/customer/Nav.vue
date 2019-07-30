@@ -1,9 +1,12 @@
 <template>
   <div>
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" :class="{bgsolid : scroll >= 100}">
-      <a class="navbar pl-5" href="#">
-        <img src="/static/logo.png" style="width:140px" />
-      </a>
+      <router-link to="/customer">
+        <a class="navbar pl-5" href="#">
+          <img src="/static/logo.png" style="width:140px" />
+        </a>
+      </router-link>
+
       <button
         class="navbar-toggler"
         type="button"
@@ -19,32 +22,39 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="#">動作片</a>
+            <router-link to="/customer/action">
+              <a class="nav-link" href="#">動作片</a>
+            </router-link>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">懸疑片</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">喜劇片</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">恐怖片</a>
-          </li>
+          <router-link to="/customer/suspicion">
+            <li class="nav-item">
+              <a class="nav-link" href="#">懸疑片</a>
+            </li>
+          </router-link>
+
+          <router-link to="/customer/happy">
+            <li class="nav-item">
+              <a class="nav-link" href="#">喜劇片</a>
+            </li>
+          </router-link>
+
+          <router-link to="/customer/horror">
+            <li class="nav-item">
+              <a class="nav-link" href="#">恐怖片</a>
+            </li>
+          </router-link>
+
           <li class="nav-item dropdown">
-            <a
-              class="nav-link dropdown-toggle"
-              href="#"
-              id="navbarDropdown"
-              role="button"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >更多</a>
+            <a class="nav-link dropdown-toggle" href="#" @click.prevent="">更多</a>
             <div class="dropdown-menu more">
-              <a class="dropdown-item pr-1" href="#">動畫</a>
-              <a class="dropdown-item" href="#">
-                <i class="fa-heart fa-lg fas pr-2"></i>我的最愛
-              </a>
+              <router-link to="/customer/animation">
+                <a class="dropdown-item pr-1" href="#">動畫</a>
+              </router-link>
+              <router-link to="/customer/mylike">
+                <a class="dropdown-item" href="#">
+                  <i class="fa-heart fa-lg fas pr-2"></i>我的最愛
+                </a>
+              </router-link>
             </div>
           </li>
         </ul>
@@ -63,7 +73,7 @@
             <i class="fas fa-search"></i>
           </button>
         </form>
-        <ul class="navbar-nav" style="line-height: 54px">
+        <ul class="navbar-nav pr-4" style="line-height: 54px">
           <li class="nav-item">
             <a class="nav-link" href="#">管理員</a>
           </li>
@@ -80,7 +90,7 @@
 
                 <div
                   data-offset="400"
-                  class="dropdown-menu dropdown-menu-right p-3 "
+                  class="dropdown-menu dropdown-menu-right p-3"
                   style="min-width: 300px;"
                 >
                   <h6 class="text-white">已選擇商品</h6>
@@ -118,6 +128,7 @@
 export default {
   data() {
     return {
+      category: "",
       scroll: "0"
     };
   },
@@ -174,7 +185,7 @@ a {
   background-color: none;
 }
 
-.dropdown:hover .more{
+.dropdown:hover .more {
   display: flex;
 }
 .shop-cart {
@@ -188,7 +199,7 @@ a {
 }
 
 /* 購物車 */
-.dropdown:hover .dropdown-menu-right{
+.dropdown:hover .dropdown-menu-right {
   display: block;
 }
 </style>

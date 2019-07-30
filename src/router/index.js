@@ -6,8 +6,11 @@ import Login from '@/components/pages/Login'
 import Products from '@/components/pages/Products'
 import CustomerOrder from '@/components/pages/CustomerOrders'
 import CustomerOrderOut from '@/components/pages/CustomerOrderOut'
+
 import Customer from '@/components/customer/Customer'
 import Content from '@/components/customer/Content'
+import Customeroder from '@/components/customer/order/Customeroder'
+import CustomerPay from '@/components/customer/order/CustomerPay'
 
 
 Vue.use(Router)
@@ -27,6 +30,16 @@ export default new Router({
           path: '',
           name: 'Content',
           component:Content,
+        },
+        {        
+          path: 'customeroder',
+          name: 'Customeroder',
+          component:Customeroder,
+        },
+        {
+          path: 'customerPay/:orderId',
+          name: 'CustomerPay',
+          component: CustomerPay,
         },
       ]
     },
@@ -60,7 +73,7 @@ export default new Router({
           component: CustomerOrder,
         },
         {
-          path: 'CustomerOrderOut/:orderId',
+          path: 'customerOrderOut/:orderId',
           name: 'CustomerOrderOut',
           component: CustomerOrderOut,
         }

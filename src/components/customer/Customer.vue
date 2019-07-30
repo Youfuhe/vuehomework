@@ -1,12 +1,9 @@
 <template>
   <div>
-    <Nav></Nav>
+    
     <Header></Header>
     <div class="content" style="background:rgb(31,31,31,1)">
       <div class="text-white" style="padding:5% 2%">
-        <div class="text-center">
-          <h2 class="pb-5">每日精選隨你看</h2>
-        </div>
         <router-view></router-view>
       </div>
     </div>
@@ -15,20 +12,42 @@
 </template>
 <script>
 import $ from "jquery";
-import Nav from "./Nav";
 import Header from "./Header";
 import Footer from "./Footer";
 
+
 export default {
   data() {
-    return {};
+    return {
+      products: []
+      //  category: "",
+    };
   },
   components: {
-    Nav,
     Header,
-    Footer
+    Footer,
   },
-  
+  methods: {
+    getProduct() {
+      console.log("2");
+      let vm = this;
+      const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/products/all`;
+      this.$http.get(api).then(response => {
+        console.log(response.data);
+        if (response.data.success) {
+          vm.products = response.data.products;
+          vm.products.forEach(item => {
+            this.$set(item, "mylike", false);
+          });
+        }
+      });
+      // this.products = this.$refs.getChiledata.products;
+    }
+  },
+  created() {
+    console.log("1");
+    this.getProduct();
+  }
   //   created() {
   //     $(".carousel").carousel({
   //       interval: 1000
