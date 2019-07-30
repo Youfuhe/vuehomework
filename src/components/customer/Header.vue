@@ -3,10 +3,25 @@
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <img class="d-block w-100" src="static\1.png" alt="First slide" />
+          <img class="d-block w-100" src="/static/1.png" alt="First slide" />
         </div>
-        <div class="carousel-item" v-for="(item,key) in imgUrl" :key="key">
-          <img class="d-block w-100" :src="item.url" alt="First slide" />
+        <div class="carousel-item ">
+          <img class="d-block w-100" src="/static/2.png" alt="First slide" />
+        </div>
+        <div class="carousel-item ">
+          <img class="d-block w-100" src="/static/3.png" alt="First slide" />
+        </div>
+        <div class="carousel-item ">
+          <img class="d-block w-100" src="/static/4.png" alt="First slide" />
+        </div>
+        <div class="carousel-item ">
+          <img class="d-block w-100" src="/static/5.png" alt="First slide" />
+        </div>
+        <div class="carousel-item ">
+          <img class="d-block w-100" src="/static/6.png" alt="First slide" />
+        </div>
+        <div class="carousel-item ">
+          <img class="d-block w-100" src="/static/7.png" alt="First slide" />
         </div>
       </div>
       <a
@@ -34,14 +49,6 @@
 export default {
   data() {
     return {
-      imgUrl: [
-        { url: "/static/2.png" },
-        { url: "/static/3.png" },
-        { url: "/static/4.png" },
-        { url: "/static/5.png" },
-        { url: "/static/6.png" },
-        { url: "/static/7.png" }
-      ]
     };
   }
 };
