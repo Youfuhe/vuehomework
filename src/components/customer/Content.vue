@@ -8,7 +8,7 @@
         :class="{bgsolid : scroll >= 100}"
       >
         <a class="px-5" href="#" @click.prevent="category = 'all'">
-          <img src="/static/logo.png" style="width:140px" />
+          <img src="static\logo.png" style="width:140px" />
         </a>
 
         <button
