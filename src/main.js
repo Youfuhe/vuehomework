@@ -7,6 +7,8 @@ import 'bootstrap';
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
 import currencyFilter from './filters/currency';
+import dateFilter from './filters/date';
+
 import './bus';
 import VeeValidate from 'vee-validate';
 import VueI18n from 'vue-i18n';
@@ -24,7 +26,7 @@ Vue.use(VueI18n);
 const i18n = new VueI18n({
   locale: 'zhTW'
 });
- 
+
 Vue.use(VeeValidate, {
   i18n,
   dictionary: {
@@ -32,8 +34,10 @@ Vue.use(VeeValidate, {
   }
 });
 
-Vue.component('loading' ,Loading )
-Vue.filter('currency' , currencyFilter)
+Vue.component('loading', Loading)
+Vue.filter('currency', currencyFilter)
+Vue.filter('date', dateFilter);
+
 
 /* eslint-disable no-new */
 new Vue({

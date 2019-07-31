@@ -3,6 +3,8 @@ import Router from 'vue-router'
 import Dashborad from '@/components/Dashborad'
 import Login from '@/components/pages/Login'
 import Products from '@/components/pages/Products'
+import Coupon from '@/components/pages/Coupon'
+import OrderList from '@/components/pages/OrderList'
 
 import Customer from '@/components/customer/Customer'
 import Content from '@/components/customer/Content'
@@ -26,7 +28,7 @@ export default new Router({
         {
           path: '',
           name: 'Content',
-          component:Content,
+          component: Content,
         },
         {
           path: 'customerPay/:orderId',
@@ -54,6 +56,18 @@ export default new Router({
           path: 'products',
           name: 'Products',
           component: Products,
+          meta: { requiresAuth: true },
+        },
+        {
+          path: 'coupon',
+          name: 'Coupon',
+          component: Coupon,
+          meta: { requiresAuth: true },
+        },
+        {
+          path: 'orderList',
+          name: 'OrderList',
+          component: OrderList,
           meta: { requiresAuth: true },
         },
       ]

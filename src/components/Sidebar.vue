@@ -16,19 +16,19 @@
             產品列表
           </router-link>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#" :class="{'active': clickList==='b'}"  @click="clickList='b'">
+        <li class="nav-item" @click="clickList='b'">
+          <router-link class="nav-link" to="/admin/orderlist" :class="{'active': clickList==='b'}">
             <span data-feather="file-text"></span>
             <i class="fas fa-address-book"></i>
             訂單列表
-          </a>
+          </router-link>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" :class="{'active': clickList==='c'}"  @click="clickList='c'" href="#">
+        <li class="nav-item" @click="clickList='c'">
+          <router-link class="nav-link" to="/admin/coupon" :class="{'active': clickList==='c'}">
             <span data-feather="file-text"></span>
             <i class="fas fa-ticket-alt"></i>
             優惠券
-          </a>
+          </router-link>
         </li>
       </ul>
       <hr />
@@ -54,15 +54,13 @@
 
 <script>
 export default {
-  data(){
-    return{
-      clickList:'a'
-    }
+  data() {
+    return {
+      clickList: "a"
+    };
   },
   methods: {
-    getPath(){
-      
-    }
-  },
-}
+    getPath() {}
+  }
+};
 </script>
