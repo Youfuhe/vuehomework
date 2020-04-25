@@ -70,7 +70,7 @@
             <button
               class="btn btn-success"
               type="submit"
-              style="position: absolute; right:-1px ;top:0 ;border-radius: 0 10px 10px 0;"
+              style="position: absolute; right:0 ;top:0 ;border-radius: 0 10px 10px 0;"
             >
               <i class="fas fa-search"></i>
             </button>
